@@ -1,5 +1,6 @@
 package com.example.ecommerceapp.presentation.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -19,10 +20,15 @@ import com.example.ecommerceapp.domain.model.Product
 
 @Composable
 fun ProductItem(
-    product: Product
+    product: Product,
+    onItemClick: (Int) -> Unit
 ) {
 
-    Column(modifier = Modifier.fillMaxSize()) {
+    Column(modifier = Modifier
+        .fillMaxSize()
+        .clickable {
+            onItemClick(product.id ?: 0)
+        }) {
         AsyncImage(
             model = ImageRequest.Builder(LocalContext.current)
                 .data(product.image)

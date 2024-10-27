@@ -23,6 +23,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.example.ecommerceapp.navigation.Detail
+import com.example.ecommerceapp.presentation.components.LoadingView
 import com.example.ecommerceapp.presentation.components.ProductItem
 
 @Composable
@@ -43,19 +45,7 @@ fun HomeScreen(
     Scaffold(modifier = Modifier.fillMaxSize()) { paddings ->
         Column(modifier = Modifier.padding(paddings)) {
             if (onLoading.value) {
-                Column(
-                    modifier = Modifier.fillMaxSize(),
-                    verticalArrangement = Arrangement.Center,
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    CircularProgressIndicator(
-                        modifier = Modifier
-                            .width(64.dp)
-                            .align(alignment = Alignment.CenterHorizontally),
-                        color = MaterialTheme.colorScheme.secondary,
-                        trackColor = MaterialTheme.colorScheme.surfaceVariant,
-                    )
-                }
+                LoadingView()
             }
             if (products.value.isNotEmpty()) {
                 LazyVerticalStaggeredGrid(
@@ -66,7 +56,9 @@ fun HomeScreen(
                     horizontalArrangement = Arrangement.spacedBy(4.dp),
                     content = {
                         items(products.value) { product ->
-                            ProductItem(product)
+                            ProductItem(product) {
+                                navController.navigate(Detail(it))
+                            }
                         }
                     },
                 )
