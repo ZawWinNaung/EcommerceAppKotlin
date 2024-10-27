@@ -2,7 +2,7 @@ package com.example.ecommerceapp.domain.core
 
 abstract class Usecase<I, O> {
 
-    suspend fun execute(input: I): ApiResult<O> {
+    suspend fun execute(input: I): MyResult<O> {
         return try {
             provide(input)
         } catch (e: Throwable) {
@@ -10,9 +10,9 @@ abstract class Usecase<I, O> {
         }
     }
 
-    abstract suspend fun provide(input: I): ApiResult<O>
+    abstract suspend fun provide(input: I): MyResult<O>
 
-    protected open suspend fun handleError(e: Throwable): ApiResult<O> {
-        return ApiResult.Error(e)
+    protected open suspend fun handleError(e: Throwable): MyResult<O> {
+        return MyResult.Error(e)
     }
 }

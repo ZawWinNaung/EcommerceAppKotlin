@@ -100,6 +100,8 @@ dependencies {
     /*retrofit*/
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
+
+    implementation (libs.androidx.material.icons.extended)
 }
 
 kapt {

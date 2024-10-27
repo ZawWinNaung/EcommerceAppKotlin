@@ -1,7 +1,7 @@
 package com.example.ecommerceapp.di
 
 import com.example.ecommerceapp.BuildConfig
-import com.example.ecommerceapp.data.ApiService
+import com.example.ecommerceapp.data.api.ApiService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
