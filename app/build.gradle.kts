@@ -20,6 +20,14 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField(
+            "String", "BASE_URL", "\"${project.findProperty("BASE_URL")}\""
+        )
+
+        buildFeatures {
+            buildConfig = true
+        }
     }
 
     buildTypes {
@@ -88,6 +96,10 @@ dependencies {
 
     /*Coil*/
     implementation(libs.coil.compose)
+
+    /*retrofit*/
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
 }
 
 kapt {
