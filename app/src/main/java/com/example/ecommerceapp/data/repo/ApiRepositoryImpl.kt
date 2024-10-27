@@ -1,5 +1,6 @@
 package com.example.ecommerceapp.data.repo
 
+import android.util.Log
 import com.example.ecommerceapp.data.ApiService
 import com.example.ecommerceapp.domain.model.Product
 import javax.inject.Inject
@@ -7,7 +8,7 @@ import javax.inject.Inject
 class ApiRepositoryImpl @Inject constructor(
     private val apiService: ApiService
 ): ApiRepository {
-    override suspend fun getExercises(): Result<List<Product>> {
+    override suspend fun getProducts(): Result<List<Product>> {
         return try {
             val response = apiService.getProducts()
             if (response.isSuccessful) {
