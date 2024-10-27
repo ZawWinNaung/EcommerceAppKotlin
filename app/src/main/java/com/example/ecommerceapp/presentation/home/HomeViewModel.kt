@@ -1,9 +1,8 @@
 package com.example.ecommerceapp.presentation.home
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.ecommerceapp.domain.core.ApiResult
+import com.example.ecommerceapp.domain.core.MyResult
 import com.example.ecommerceapp.domain.model.Product
 import com.example.ecommerceapp.domain.usecase.GetProductsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -30,12 +29,12 @@ class HomeViewModel @Inject constructor(
         _onLoading.value = true
         viewModelScope.launch {
             when (val result = getProductsUseCase.execute(Unit)) {
-                is ApiResult.Success -> {
+                is MyResult.Success -> {
                     _onLoading.value = false
                     _products.value = result.data
                 }
 
-                is ApiResult.Error -> {
+                is MyResult.Error -> {
                     _onLoading.value = false
                     _onError.value = result.throwable
                 }

@@ -1,7 +1,6 @@
-package com.example.ecommerceapp.data.repo
+package com.example.ecommerceapp.data.api.repo
 
-import android.util.Log
-import com.example.ecommerceapp.data.ApiService
+import com.example.ecommerceapp.data.api.ApiService
 import com.example.ecommerceapp.domain.model.Product
 import javax.inject.Inject
 

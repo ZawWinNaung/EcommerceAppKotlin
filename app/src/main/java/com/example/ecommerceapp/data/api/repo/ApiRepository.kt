@@ -1,4 +1,4 @@
-package com.example.ecommerceapp.data.repo
+package com.example.ecommerceapp.data.api.repo
 
 import com.example.ecommerceapp.domain.model.Product
 

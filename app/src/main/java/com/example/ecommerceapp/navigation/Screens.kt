@@ -10,3 +10,6 @@ data object Home
 data class Detail(
     val id: Int
 )
+
+@Serializable
+data object Cart

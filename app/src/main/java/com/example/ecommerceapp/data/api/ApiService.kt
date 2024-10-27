@@ -1,4 +1,4 @@
-package com.example.ecommerceapp.data
+package com.example.ecommerceapp.data.api
 
 import com.example.ecommerceapp.domain.model.Product
 import retrofit2.Response
