@@ -2,6 +2,10 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.jetbrains.kotlin.serialization)
+    alias(libs.plugins.hilt.android)
+    alias(libs.plugins.androidx.room)
+    id("kotlin-kapt")
 }
 
 android {
@@ -16,6 +20,14 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField(
+            "String", "BASE_URL", "\"${project.findProperty("BASE_URL")}\""
+        )
+
+        buildFeatures {
+            buildConfig = true
+        }
     }
 
     buildTypes {
@@ -37,6 +49,17 @@ android {
     buildFeatures {
         compose = true
     }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.1"
+    }
+    packaging {
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+        }
+    }
+    room {
+        schemaDirectory("$projectDir/schemas")
+    }
 }
 
 dependencies {
@@ -56,4 +79,29 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+    implementation(libs.kotlinx.serialization.json)
+    implementation(libs.navigation.compose)
+
+    /*hilt*/
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
+    kapt(libs.dagger.compiler)
+    implementation(libs.androidx.hilt.navigation.compose)
+
+    /*Room*/
+    implementation(libs.androidx.room.runtime)
+    implementation (libs.androidx.room.ktx)
+    kapt(libs.androidx.room.compiler)
+
+    /*Coil*/
+    implementation(libs.coil.compose)
+
+    /*retrofit*/
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+}
+
+kapt {
+    correctErrorTypes = true
 }
