@@ -188,7 +188,7 @@ fun DetailScreen(
                 scope.launch {
                     snackbarHostState.showSnackbar(
                         message = error.message ?: "Unknown Error",
-                        duration = SnackbarDuration.Long
+                        duration = SnackbarDuration.Short
                     )
                 }
             }
