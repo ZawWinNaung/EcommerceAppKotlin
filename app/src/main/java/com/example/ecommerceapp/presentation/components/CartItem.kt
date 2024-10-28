@@ -23,7 +23,7 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.example.ecommerceapp.R
-import com.example.ecommerceapp.domain.model.CartProduct
+import com.example.core.domain.model.CartProduct
 
 @Composable
 fun CartItem(

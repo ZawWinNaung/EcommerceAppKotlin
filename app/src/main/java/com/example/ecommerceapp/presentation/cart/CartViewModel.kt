@@ -2,11 +2,11 @@ package com.example.ecommerceapp.presentation.cart
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.ecommerceapp.domain.core.MyResult
-import com.example.ecommerceapp.domain.model.CartProduct
-import com.example.ecommerceapp.domain.usecase.CheckOutUseCase
-import com.example.ecommerceapp.domain.usecase.DeleteItemByIdUseCase
-import com.example.ecommerceapp.domain.usecase.GetAllCartItemsUseCase
+import com.example.core.domain.core.MyResult
+import com.example.core.domain.model.CartProduct
+import com.example.database.domain.usecase.CheckOutUseCase
+import com.example.database.domain.usecase.DeleteItemByIdUseCase
+import com.example.database.domain.usecase.GetAllCartItemsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

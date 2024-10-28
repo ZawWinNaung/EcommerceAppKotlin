@@ -1,9 +1,9 @@
 package com.example.ecommerceapp.domain.usecase
 
-import com.example.ecommerceapp.data.api.repo.ApiRepository
-import com.example.ecommerceapp.domain.core.MyResult
-import com.example.ecommerceapp.domain.core.Usecase
-import com.example.ecommerceapp.domain.model.Product
+import com.example.ecommerceapp.data.repo.ApiRepository
+import com.example.core.domain.core.MyResult
+import com.example.core.domain.core.Usecase
+import com.example.core.domain.model.Product
 import javax.inject.Inject
 
 class GetProductByIdUseCase @Inject constructor(
