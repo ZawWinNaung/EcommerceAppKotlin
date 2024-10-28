@@ -29,6 +29,7 @@ import com.example.ecommerceapp.domain.model.CartProduct
 fun CartItem(
     product: CartProduct,
     onItemSelected: (CartProduct) -> Unit,
+    showCheckBox: Boolean = true
 ) {
 
     var checkState by remember { mutableStateOf(product.isSelected) }
@@ -46,13 +47,15 @@ fun CartItem(
         }) {
 
         Row {
-            Checkbox(
-                checked = checkState,
-                onCheckedChange = {
-                    checkState = it
-                    onItemSelected(product.apply { isSelected = it })
-                },
-            )
+            if (showCheckBox) {
+                Checkbox(
+                    checked = checkState,
+                    onCheckedChange = {
+                        checkState = it
+                        onItemSelected(product.apply { isSelected = it })
+                    },
+                )
+            }
             AsyncImage(
                 model = ImageRequest.Builder(LocalContext.current)
                     .data(product.image)
@@ -61,7 +64,9 @@ fun CartItem(
                 placeholder = painterResource(R.drawable.rounded_image_24),
                 contentScale = ContentScale.Fit,
                 contentDescription = product.description,
-                modifier = Modifier.size(80.dp)
+                modifier = Modifier
+                    .size(80.dp)
+                    .padding(start = if (showCheckBox) 0.dp else 8.dp)
             )
             Column {
                 Text(

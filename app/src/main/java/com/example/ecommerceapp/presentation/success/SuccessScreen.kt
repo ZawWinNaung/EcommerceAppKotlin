@@ -1,4 +1,4 @@
-package com.example.ecommerceapp.presentation.check_out
+package com.example.ecommerceapp.presentation.success
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
