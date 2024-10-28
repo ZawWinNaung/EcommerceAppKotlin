@@ -15,3 +15,6 @@ data object Cart
 
 @Serializable
 data object Success
+
+@Serializable
+data object Purchased

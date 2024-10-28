@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
@@ -20,6 +21,9 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarDuration
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -29,6 +33,7 @@ import androidx.compose.runtime.mutableDoubleStateOf
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -41,10 +46,13 @@ import com.example.ecommerceapp.navigation.Success
 import com.example.ecommerceapp.presentation.components.CartItem
 import com.example.ecommerceapp.presentation.components.LoadingView
 import com.example.ecommerceapp.util.toAmount
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CartScreen(navController: NavController, viewModel: CartViewModel = hiltViewModel()) {
+    val snackbarHostState = remember { SnackbarHostState() }
+    val scope = rememberCoroutineScope()
     val lazyListState = rememberLazyListState()
     val product = viewModel.product.collectAsState()
     val onError = viewModel.onError.collectAsState()
@@ -134,7 +142,10 @@ fun CartScreen(navController: NavController, viewModel: CartViewModel = hiltView
                     )
                 }
             }
-        }
+        },
+        snackbarHost = {
+            SnackbarHost(hostState = snackbarHostState)
+        },
     ) { padding ->
         Column(
             modifier = Modifier
@@ -146,11 +157,20 @@ fun CartScreen(navController: NavController, viewModel: CartViewModel = hiltView
                 LoadingView()
             }
 
+            onError.value?.let { error ->
+                scope.launch {
+                    snackbarHostState.showSnackbar(
+                        message = error.message ?: "Unknown Error",
+                        duration = SnackbarDuration.Long
+                    )
+                }
+            }
+
             LazyColumn(
                 modifier = Modifier.fillMaxSize(),
                 state = lazyListState
             ) {
-                itemsIndexed(product.value) { index, it ->
+                items(product.value) {
                     CartItem(it, onItemSelected = { selectedItem ->
                         val itemPrice = selectedItem.price * selectedItem.quantity
                         if (selectedItem.isSelected) {
