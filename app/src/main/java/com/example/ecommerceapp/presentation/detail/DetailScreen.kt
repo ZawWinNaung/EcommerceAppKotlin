@@ -18,6 +18,9 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarDuration
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -26,6 +29,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -43,6 +47,7 @@ import com.example.ecommerceapp.navigation.Cart
 import com.example.ecommerceapp.presentation.components.AddToCartBottomSheet
 import com.example.ecommerceapp.presentation.components.LoadingView
 import com.example.ecommerceapp.presentation.components.QuantityPicker
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -51,7 +56,8 @@ fun DetailScreen(
 ) {
 
     val scrollState = rememberScrollState()
-
+    val snackbarHostState = remember { SnackbarHostState() }
+    val scope = rememberCoroutineScope()
     val product = viewModel.product.collectAsState()
     val onError = viewModel.onError.collectAsState()
     val onLoading = viewModel.onLoading.collectAsState()
@@ -84,6 +90,9 @@ fun DetailScreen(
                 }
             }
             )
+        },
+        snackbarHost = {
+            SnackbarHost(hostState = snackbarHostState)
         },
     ) { padding ->
         Column(
@@ -175,8 +184,13 @@ fun DetailScreen(
                 }
             }
 
-            onError.value?.let {
-//                ErrorScreen(error = it)
+            onError.value?.let { error ->
+                scope.launch {
+                    snackbarHostState.showSnackbar(
+                        message = error.message ?: "Unknown Error",
+                        duration = SnackbarDuration.Short
+                    )
+                }
             }
             if (showBottomSheet) {
                 AddToCartBottomSheet(

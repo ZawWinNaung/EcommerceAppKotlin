@@ -6,9 +6,10 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import com.example.ecommerceapp.presentation.cart.CartScreen
-import com.example.ecommerceapp.presentation.check_out.SuccessScreen
+import com.example.ecommerceapp.presentation.success.SuccessScreen
 import com.example.ecommerceapp.presentation.detail.DetailScreen
 import com.example.ecommerceapp.presentation.home.HomeScreen
+import com.example.ecommerceapp.presentation.purchased_item.PurchasedItemsScreen
 
 @Composable
 fun NavigationHost() {
@@ -27,6 +28,9 @@ fun NavigationHost() {
         }
         composable<Success> {
             SuccessScreen(navController)
+        }
+        composable<Purchased> {
+            PurchasedItemsScreen(navController)
         }
     }
 
