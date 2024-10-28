@@ -30,7 +30,7 @@ class PurchasedItemsViewModel @Inject constructor(
             when (val result = getAllCartItemsUseCase.execute(true)) {
                 is MyResult.Success -> {
                     _onLoading.value = false
-                    _product.value = result.data
+                    _product.value = result.data.reversed()
                 }
 
                 is MyResult.Error -> {
