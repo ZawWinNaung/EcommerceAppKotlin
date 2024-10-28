@@ -10,6 +10,8 @@ data class CartItemEntity(
     @SerializedName("id")
     @PrimaryKey(autoGenerate = true)
     val id: Int,
+    @SerializedName("product_id")
+    val productId: Int,
     @SerializedName("title")
     val title: String,
     @SerializedName("price")
@@ -26,4 +28,6 @@ data class CartItemEntity(
     val count: Int,
     @SerializedName("quantity")
     val quantity: Int,
+    @SerializedName("is_check_out")
+    val isCheckOut: Boolean
 )

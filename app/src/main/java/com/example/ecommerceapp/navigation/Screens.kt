@@ -1,6 +1,5 @@
 package com.example.ecommerceapp.navigation
 
-import com.example.ecommerceapp.domain.model.Product
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -13,3 +12,6 @@ data class Detail(
 
 @Serializable
 data object Cart
+
+@Serializable
+data object Success

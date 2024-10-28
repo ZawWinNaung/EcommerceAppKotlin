@@ -17,6 +17,7 @@ class InsertItemToCartUseCase @Inject constructor(
             val product = input.product
             val entityItem = CartItemEntity(
                 id = 0,
+                productId = product.id ?: 0,
                 title = product.title ?: "",
                 price = product.price ?: 0.0,
                 description = product.description ?: "",
@@ -24,7 +25,8 @@ class InsertItemToCartUseCase @Inject constructor(
                 image = product.image ?: "",
                 rate = product.rating?.rate ?: 0.0,
                 count = product.rating?.count ?: 0,
-                quantity = input.quantity
+                quantity = input.quantity,
+                isCheckOut = false
             )
             repo.insertItem(entityItem)
             MyResult.Success(Unit)
