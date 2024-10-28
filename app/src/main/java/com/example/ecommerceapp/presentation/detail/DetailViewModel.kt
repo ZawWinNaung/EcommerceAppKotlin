@@ -1,13 +1,12 @@
 package com.example.ecommerceapp.presentation.detail
 
-import android.util.Log
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.ecommerceapp.domain.core.MyResult
-import com.example.ecommerceapp.domain.model.Product
+import com.example.core.domain.core.MyResult
+import com.example.core.domain.model.Product
 import com.example.ecommerceapp.domain.usecase.GetProductByIdUseCase
-import com.example.ecommerceapp.domain.usecase.InsertItemToCartUseCase
+import com.example.database.domain.usecase.InsertItemToCartUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

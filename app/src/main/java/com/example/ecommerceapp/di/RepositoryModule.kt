@@ -1,9 +1,9 @@
 package com.example.ecommerceapp.di
 
-import com.example.ecommerceapp.data.api.repo.ApiRepository
-import com.example.ecommerceapp.data.api.repo.ApiRepositoryImpl
-import com.example.ecommerceapp.data.cache.repo.CartItemRepository
-import com.example.ecommerceapp.data.cache.repo.CartItemRepositoryImpl
+import com.example.ecommerceapp.data.repo.ApiRepository
+import com.example.ecommerceapp.data.repo.ApiRepositoryImpl
+import com.example.database.data.repo.CartItemRepository
+import com.example.database.data.repo.CartItemRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -15,7 +15,4 @@ abstract class RepositoryModule {
 
     @Binds
     abstract fun bindApiRepository(apiRepositoryImpl: ApiRepositoryImpl): ApiRepository
-
-    @Binds
-    abstract fun bindCartItemRepository(cartItemRepositoryImpl: CartItemRepositoryImpl): CartItemRepository
 }
